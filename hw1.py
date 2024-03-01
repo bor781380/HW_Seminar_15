@@ -4,6 +4,8 @@
 
 import csv
 import logging
+import argparse
+
 
 class Student:
     """
@@ -99,10 +101,10 @@ class Student:
 
 
 
-# def parse_arguments():
-#     parser = argparse.ArgumentParser(description='Краткое описание:')
-#     parser.add_argument('subjects_file', help='укажите CSV-файл с предметами - subjects.csv')
-#     return parser.parse_args()
+def parse_arguments():
+    parser = argparse.ArgumentParser(description='Краткое описание:')
+    parser.add_argument('subjects_file', help='укажите CSV-файл с предметами - subjects.csv')
+    return parser.parse_args()
 
 
 def setup_logging():
@@ -112,9 +114,9 @@ def setup_logging():
 if __name__ == '__main__':
     setup_logging()
     logging.info('Program start')
-    # args = parse_arguments()
-    # student = Student("Иван Иванов", args.subjects_file)
-    student = Student("Иван Иванов", "subjects.csv")
+    args = parse_arguments()
+    student = Student("Иван Иванов", args.subjects_file)
+    #student = Student("Иван Иванов", "subjects.csv")
 
     student.add_grade("Математика", 4)
     student.add_test_score("Математика", 85)
@@ -134,8 +136,6 @@ if __name__ == '__main__':
     print(f"Средний результат по тестам по математике: {average_test_score}")
     average_test_score = student.get_average_test_score("История")
     print(f"Средний результат по тестам по истории: {average_test_score}")
-    # average_test_score = student.get_average_test_score("Химия")
     student.save_subjects("subjects.csv")
-    #print(student.subjects)
     print(student)
     logging.info('Program stop')
